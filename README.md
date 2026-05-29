@@ -121,7 +121,7 @@ The implementation intentionally preserves:
 | Component | Status |
 |---|---|
 | Fine orientation task structure | Preserved |
-| MATLAB `baseAngle` difficulty scale | Preserved |
+|  `baseAngle` difficulty scale | Preserved |
 | Three interleaved staircases | Preserved |
 | Catch / bonus trials | Preserved |
 | Post-stimulus masking | Preserved |
@@ -722,39 +722,7 @@ The JSON summary is used by the analytics script to infer retinotopic location a
 
 ---
 
-### MATLAB-compatible MAT output
 
-When `scipy.io.savemat` is available, the script also creates:
-
-```text
-*.mat
-```
-
-The `.mat` file contains a MATLAB-compatible `results` matrix with the original 7-column structure:
-
-| Column | Meaning |
-|---:|---|
-| 1 | Trial number |
-| 2 | Absolute difficulty |
-| 3 | Response time |
-| 4 | Signed angle |
-| 5 | Correct |
-| 6 | Confidence |
-| 7 | Staircase |
-
-It also stores:
-
-```text
-initials
-h_ecc_orig
-v_ecc_orig
-baseAngle
-trialStructure
-runningScore
-time
-```
-
----
 
 ## Weibull psychometric analysis
 

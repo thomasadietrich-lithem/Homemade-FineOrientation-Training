@@ -105,11 +105,6 @@ The task is a fine orientation discrimination paradigm:
 | 4 | The participant reports whether the Gabor was tilted left or right |
 | 5 | One of three adaptive staircases is updated |
 
-This is not a Random Dot Kinematogram task.
-
-This is not a motion-direction task.
-
-This implementation contains no FBA pre-cue. The source code explicitly preserves the fact that the MATLAB Fine Orientation reference task has no FBA pre-cue.
 
 ---
 
@@ -131,7 +126,6 @@ The implementation intentionally preserves:
 | Catch / bonus trials | Preserved |
 | Post-stimulus masking | Preserved |
 | Response after mask only | Preserved |
-| MATLAB-compatible 7-column `.mat` output | Preserved |
 | Optional metacognitive response mode | Preserved |
 | EyeLink integration | Not implemented |
 | Gamma-table loading from Rochester lab computer | Not reproduced |
@@ -164,12 +158,6 @@ Default values:
 | Number of trials | `300` |
 | Metacognition | Disabled |
 
-The fixation location is fixed at:
-
-```text
-H = 0.0°
-V = 0.0°
-```
 
 Stimulus location is user-defined.
 
@@ -215,7 +203,6 @@ Cancel
 ```
 
 If the current resolution differs from the stored profile, the script displays a warning and recommends recalibration.
-
 This matters because screen width, viewing distance and resolution affect:
 
 | Affected quantity | Why it matters |
@@ -275,7 +262,6 @@ No automatic clinical decision rule is implemented.
 ```
 
 Confidence ratings and score are treated as optional metadata because the default practical training mode disables metacognition.
-
 Bonus/catch trials are displayed descriptively but excluded from threshold fitting by default because they do not update the three adaptive staircases.
 
 ---
@@ -342,11 +328,8 @@ The HTML dashboard includes:
 ## Paradigm summary
 
 This repository implements a static Gabor fine orientation discrimination paradigm.
-
 The participant fixates centrally while a Gabor patch is presented at a user-specified visual-field location.
-
 The Gabor does not move.
-
 The participant judges whether the orientation is tilted:
 
 ```text
@@ -362,7 +345,6 @@ The sign of the trial angle determines the correct response:
 | Positive angle | RIGHT |
 
 The task is adaptive. Correct and incorrect responses update one of three interleaved staircases.
-
 The default training mode is simplified for home use:
 
 ```text
@@ -407,7 +389,6 @@ gaussian_stdev_px = round(stimulus_radius_px / 1.5)
 ```
 
 The Gabor frame is generated in MATLAB-like 0–255 grayscale, then converted to a PsychoPy-compatible RGB texture.
-
 This conversion is intentional. The code uses PIL RGB images to avoid backend-dependent black-square artifacts that can occur with some PsychoPy/numpy texture paths.
 
 ---
@@ -428,7 +409,6 @@ Current timing constants:
 | Inter-trial interval | 1.00 s |
 
 The number of temporal-envelope frames depends on the detected refresh rate.
-
 At 60 Hz, the onset and offset ramps each contain approximately 15 frames, with inclusive MATLAB-style indexing.
 
 ---
@@ -587,9 +567,7 @@ Staircase indices are clipped to remain inside the available difficulty scale.
 ### Bonus/catch trials
 
 Bonus/catch trials use staircase identity `0`.
-
 They are included in the behavioral record and descriptive accuracy but do not update the adaptive staircases.
-
 Their difficulty is derived from staircase 1 according to the MATLAB-inspired rule:
 
 ```text
@@ -926,7 +904,6 @@ This distinction matters because the Rochester/DataFitting-compatible convention
 ### Fit validation
 
 The analyzer rejects non-finite or unreasonable thresholds.
-
 A fitted threshold is rejected if it falls outside the reasonable session range:
 
 ```text
@@ -950,7 +927,6 @@ fit_bic
 ```
 
 It computes these for both the Rochester-compatible fit and the direct 72.5% fit.
-
 These metrics are descriptive only. They do not trigger a clinical interpretation.
 
 ---
@@ -958,7 +934,6 @@ These metrics are descriptive only. They do not trigger a clinical interpretatio
 ## Longitudinal dashboard
 
 The dashboard groups sessions by trained location.
-
 Location is inferred from the companion JSON summary when possible:
 
 ```text
@@ -976,10 +951,6 @@ Example:
 ```text
 H-7.00_V-4.50
 ```
-
-If the companion JSON is missing, the analyzer tries to infer location from the CSV filename.
-
----
 
 ### Longitudinal metrics
 
